@@ -9,6 +9,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "node-addon-api": "^7.0.0",
     "node-gyp": "^10.0.1"
   }
 }
