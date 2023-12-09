@@ -1,13 +1,18 @@
 {
   "name": "naph",
-  "version": "0.0.1",
   "description": "Naph is a Node.js Library that Allow Hosting Native Audio Plugins (VST, VST3, AAX, AU)",
-  "main": "lib/index.js",
-  "gypfile": true,
+  "version": "0.0.1",
   "repository": "https://github.com/potistudio/naph.js",
   "author": "POTI <potistudio2022@gmail.com>",
   "license": "MIT",
+  "type": "commonjs",
   "private": false,
+  "gypfile": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "node-gyp rebuild",
+    "test": "node ./test/test.js"
+  },
   "devDependencies": {
     "node-addon-api": "^7.0.0",
     "node-gyp": "^10.0.1"
