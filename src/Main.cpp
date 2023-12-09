@@ -1,6 +1,10 @@
 
+#define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED true
+#define DONT_SET_USING_JUCE_NAMESPACE true
+
 #include <iostream>
 #include <napi.h>
+#include "juce_core.h"
 
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 	public:
@@ -26,6 +30,7 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 				return;
 			}
 
+			juce::String text = juce::String();
 			std::cout << "Hello from Constructor!" << std::endl;
 		}
 
