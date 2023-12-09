@@ -5,7 +5,10 @@
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 	public:
 		static Napi::Object Init (Napi::Env env, Napi::Object exports) {
-			Napi::Function func = DefineClass (env, "PluginHostWrapper", {});
+			Napi::Function func = DefineClass (env, "PluginHostWrapper", {
+				InstanceMethod ("helloInstance", &PluginHostWrapper::HelloInstance, napi_enumerable),
+				StaticMethod ("helloStatic", &PluginHostWrapper::HelloStatic, napi_enumerable)
+			});
 			Napi::FunctionReference *constructor = new Napi::FunctionReference();
 			*constructor = Napi::Persistent (func);
 
@@ -23,7 +26,15 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 				return;
 			}
 
-			std::cout << "Hello World!" << std::endl;
+			std::cout << "Hello from Constructor!" << std::endl;
+		}
+
+		static Napi::Value HelloStatic (const Napi::CallbackInfo& info) {
+			return Napi::String::New (info.Env(), "Hello from Static Method!");
+		}
+
+		Napi::Value HelloInstance (const Napi::CallbackInfo& info) {
+			return Napi::String::New (info.Env(), "Hello from Instance Method!");
 		}
 };
 
