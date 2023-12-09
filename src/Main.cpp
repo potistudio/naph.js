@@ -30,6 +30,7 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 				return;
 			}
 
+			juce::String text = juce::String();
 			std::cout << "Hello from Constructor!" << std::endl;
 		}
 
