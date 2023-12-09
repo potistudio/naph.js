@@ -6,7 +6,7 @@
 		],
 		'include_dirs': [
 			"<!@(node -p \"require('node-addon-api').include\")",
-			"./lib/thirdparty/JUCE/modules/juce_core"
+			"./lib/thirdparty/JUCE/modules"
 		],
 		'libraries': [
 			"../lib/thirdparty/JUCEStatic.lib"

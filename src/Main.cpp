@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <napi.h>
-#include "juce_core.h"
+#include "juce_core/juce_core.h"
 
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 	public:
