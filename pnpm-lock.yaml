@@ -4,10 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-devDependencies:
+dependencies:
   node-addon-api:
     specifier: ^7.0.0
     version: 7.0.0
+
+devDependencies:
   node-gyp:
     specifier: ^10.0.1
     version: 10.0.1
@@ -431,7 +433,7 @@ packages:
 
   /node-addon-api@7.0.0:
     resolution: {integrity: sha512-vgbBJTS4m5/KkE16t5Ly0WW9hz46swAstv0hYYwMtbG7AznRhNyfLRe8HZAiWIpcHzoO7HxhLuBQj9rJ/Ho0ZA==}
-    dev: true
+    dev: false
 
   /node-gyp@10.0.1:
     resolution: {integrity: sha512-gg3/bHehQfZivQVfqIyy8wTdSymF9yTyP4CJifK73imyNMU8AIGQE2pUa7dNWfmMeG9cDVF2eehiRMv0LC1iAg==}
