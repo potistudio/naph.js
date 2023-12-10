@@ -5,6 +5,7 @@ export class PluginHost {
 
 	helloInstance(): string;
 	showAlert (callback: () => void): void;
+	asyncCallback (callback: (sum: number) => void): void;
 
 	static helloStatic(): string;
 }
