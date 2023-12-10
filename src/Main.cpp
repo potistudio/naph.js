@@ -2,8 +2,12 @@
 #define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED true
 #define DONT_SET_USING_JUCE_NAMESPACE true
 
-#include <iostream>
+#include <iostream> // For Debuging
+
 #include <napi.h>
+#include <chrono>
+#include <thread>
+
 #include "juce_core/juce_core.h"
 #include "juce_gui_basics/juce_gui_basics.h"
 
@@ -30,6 +34,26 @@ class PromiseWorker : public Napi::AsyncWorker {
 
 	private:
 		int sum;
+};
+
+class AlertWindowWorker : public Napi::AsyncWorker {
+	public:
+		AlertWindowWorker (Napi::Env env, Napi::Function callback) : Napi::AsyncWorker (env), tsfn(Napi::ThreadSafeFunction::New(env, callback, "AlertWindowWorker", 0, 1)) {}
+		virtual ~AlertWindowWorker() override { tsfn.Release(); }
+
+	protected:
+		void Execute() override {
+			//TODO: to Threadsafe Function
+			// BlockingCall -> Juce Async Callback -> Call js
+			tsfn.BlockingCall ([](Napi::Env env, Napi::Function js_callback){
+				js_callback.Call ({ Napi::String::New(env, "AAA") });
+			});
+			// juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::InfoIcon, "Hello World!", "Congratulations!!!This Window is Called from Node.js", "OK", nullptr, juce::ModalCallbackFunction::create([](int result) {
+			// }));
+		}
+
+	private:
+		Napi::ThreadSafeFunction tsfn;
 };
 
 /* Wrapper */
@@ -72,7 +96,12 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 		}
 
 		void ShowAlert (const Napi::CallbackInfo& info) {
-			juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::InfoIcon, "Hello World!", "Congratulations!!!This Window is Called from Node.js");
+			Napi::Env env = info.Env();
+			Napi::Function callback = info[0].As<Napi::Function>();
+
+			AlertWindowWorker* worker = new AlertWindowWorker (env, callback);
+			worker -> Queue();
+			return;
 		}
 
 		void AsyncCallback (const Napi::CallbackInfo& info) {

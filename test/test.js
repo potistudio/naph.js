@@ -7,10 +7,10 @@ const host = new naph.PluginHost(); // "Hello from Constructor!"
 console.log (host.helloInstance()); // "Hello from Instance Method!"
 
 !function main() {
-	// host.showAlert ((a) => {
-	// 	console.log("Callback", a);
-	// });
-	host.asyncCallback ((a) => {
+	host.showAlert ((a) => {
 		console.log("Callback", a);
-	})
+	});
+	// host.asyncCallback ((a) => {
+	// 	console.log("Callback", a);
+	// })
 }();
