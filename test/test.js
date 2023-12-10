@@ -6,8 +6,11 @@ console.log (naph.PluginHost.helloStatic()); // "Hello from Static Method!"
 const host = new naph.PluginHost(); // "Hello from Constructor!"
 console.log (host.helloInstance()); // "Hello from Instance Method!"
 
-!async function main() {
-	host.showAlert (() => {
-		console.log("Main");
-	});
+!function main() {
+	// host.showAlert ((a) => {
+	// 	console.log("Callback", a);
+	// });
+	host.asyncCallback ((a) => {
+		console.log("Callback", a);
+	})
 }();

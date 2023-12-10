@@ -7,31 +7,32 @@
 #include "juce_core/juce_core.h"
 #include "juce_gui_basics/juce_gui_basics.h"
 
-// class PromiseWorker : public Napi::AsyncWorker {
-// 	public:
-// 		PromiseWorker (Napi::Env env, Napi::Function callback) : Napi::AsyncWorker (callback) {}
+/* Callback Async Worker */
+class PromiseWorker : public Napi::AsyncWorker {
+	public:
+		PromiseWorker (Napi::Env env, Napi::Function callback) : Napi::AsyncWorker (callback), sum(0) {}
 
-// 	protected:
-// 		void Execute () override {
-// 			sum = 1 + 1;
-// 		}
+	protected:
+		void Execute() override {
+			sum = 1 + 1;
+		}
 
-// 		void OnOK() override {
-// 			Napi::Env env = Env();
+		void OnOK() override {
+			Napi::Env env = Env();
 
-// 			Callback().MakeCallback(
-// 				Receiver().Value(),
-// 				{
-// 					env.Null();
-// 					Napi::Number::New (env, sum)
-// 				}
-// 			);
-// 		}
+			Callback().MakeCallback (
+				Receiver().Value(),
+				{
+					Napi::Number::New (env, sum)
+				}
+			);
+		}
 
-// 	private:
-// 		int sum;
-// }
+	private:
+		int sum;
+};
 
+/* Wrapper */
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 	public:
 		static Napi::Object Init (Napi::Env env, Napi::Object exports) {
@@ -79,11 +80,13 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 
 			Napi::Function callback = info[0].As<Napi::Function>();
 
-			// (new PromiseWorker(env, callback)) -> Queue();
-			// return;
+			PromiseWorker* worker = new PromiseWorker (env, callback);
+			worker -> Queue();
+			return;
 		}
 };
 
+/* Exporter */
 class Naph : public Napi::Addon<Naph> {
 	public:
 		Naph (Napi::Env env, Napi::Object exports) {
