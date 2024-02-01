@@ -14,7 +14,7 @@
 		'dependencies': [
 			"<!(node -p \"require('node-addon-api').gyp\")"
 		],
-		'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
+		'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS', 'JUCE_PLUGINHOST_VST' ],
 		"cflags!": [ "-fno-exceptions" ],
 		"cflags_cc!": [ "-fno-exceptions" ]
 	}]
