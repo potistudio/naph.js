@@ -7,4 +7,4 @@ Naph is a Node.js Library that Allow Hosting Native Audio Plugins (VST, VST3, AA
 
 **Work in Progress...**  
 Please Wait 😎  
-(You Can "Watch This Repository" to Notify You to Update)
+(I'm still a Beginner in C++, so development will take some time, but I'd like to complete it someday.)
