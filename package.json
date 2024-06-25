@@ -6,7 +6,6 @@
   "author": "POTI <potistudio2022@gmail.com>",
   "license": "MIT",
   "type": "commonjs",
-  "private": false,
   "gypfile": true,
   "main": "lib/index.js",
   "scripts": {
@@ -18,5 +17,6 @@
   },
   "dependencies": {
     "node-addon-api": "^7.0.0"
-  }
+  },
+  "packageManager": "yarn@4.3.1"
 }
