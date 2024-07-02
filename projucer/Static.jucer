@@ -20,9 +20,13 @@
   <EXPORTFORMATS>
     <VS2022 targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="Static"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Static" linkTimeOptimisation="0"
+                       usePrecompiledHeaderFile="0"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="Static" winArchitecture="x64"
-                       characterSet="Unicode"/>
+                       characterSet="Unicode" linkTimeOptimisation="1" usePrecompiledHeaderFile="0"
+                       fastMath="1" optimisation="3" winWarningLevel="4" warningsAreErrors="0"
+                       useRuntimeLibDLL="0" multiProcessorCompilation="1" enableIncrementalLinking="0"
+                       alwaysGenerateDebugSymbols="0" generateManifest="1"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_processors" path="../../../../../Programs/Projucer/modules"/>
