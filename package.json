@@ -9,7 +9,8 @@
   "gypfile": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "node-gyp rebuild",
+    "build:debug": "node-gyp rebuild",
+    "build:release": "node-gyp rebuild --release",
     "test": "node ./test/test.js"
   },
   "devDependencies": {
