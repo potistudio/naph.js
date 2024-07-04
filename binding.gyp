@@ -4,10 +4,19 @@
 			"target_name": "naph",
 			"sources": [
 				"src/Main.cpp",
+				"lib/thirdparty/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp",
+				"lib/thirdparty/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp",
+				"lib/thirdparty/JUCE/modules/juce_core/juce_core.cpp",
+				"lib/thirdparty/JUCE/modules/juce_data_structures/juce_data_structures.cpp",
+				"lib/thirdparty/JUCE/modules/juce_events/juce_events.cpp",
+				"lib/thirdparty/JUCE/modules/juce_graphics/juce_graphics.cpp",
+				"lib/thirdparty/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp",
+				"lib/thirdparty/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp",
 			],
 			"include_dirs": [
 				"<!@(node -p \"require('node-addon-api').include\")",
-				"lib/thirdparty/JUCE/modules"
+				"lib/thirdparty/JUCE/modules",
+				"lib/thirdparty/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 			],
 			"libraries": [
 				"../lib/thirdparty/JUCEStatic.lib",
