@@ -30,10 +30,28 @@
 			],
 			"cflags!": [
 				"-fno-exceptions",
+				"-fno-rtti",
 			],
 			"cflags_cc!": [
 				"-fno-exceptions",
+				"-fno-rtti",
 			],
+			"cflags": [
+				"-fexceptions",
+				"-frtti",
+			],
+			"cflags_cc": [
+				"-fexceptions",
+				"-frtti",
+			],
+			"msvs_settings": {
+				"VCCLCompilerTool": {
+					"AdditionalOptions": [
+						"/GR", # Enable RTTI
+						"/EHsc" # Enable C++ Exceptions
+					] # Force for MSVC
+				}
+			}
 		},
 	],
 }
