@@ -1,44 +1,15 @@
 
-#define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED true
-#define DONT_SET_USING_JUCE_NAMESPACE true
-
 #include <iostream>
 #include <napi.h>
 #include "juce_core/juce_core.h"
-#include "juce_gui_basics/juce_gui_basics.h"
-
-// class PromiseWorker : public Napi::AsyncWorker {
-// 	public:
-// 		PromiseWorker (Napi::Env env, Napi::Function callback) : Napi::AsyncWorker (callback) {}
-
-// 	protected:
-// 		void Execute () override {
-// 			sum = 1 + 1;
-// 		}
-
-// 		void OnOK() override {
-// 			Napi::Env env = Env();
-
-// 			Callback().MakeCallback(
-// 				Receiver().Value(),
-// 				{
-// 					env.Null();
-// 					Napi::Number::New (env, sum)
-// 				}
-// 			);
-// 		}
-
-// 	private:
-// 		int sum;
-// }
+#include "juce_audio_processors/juce_audio_processors.h"
 
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 	public:
 		static Napi::Object Init (Napi::Env env, Napi::Object exports) {
 			Napi::Function func = DefineClass (env, "PluginHostWrapper", {
 				InstanceMethod ("helloInstance", &PluginHostWrapper::HelloInstance, napi_enumerable),
-				InstanceMethod ("showAlert", &PluginHostWrapper::ShowAlert, napi_enumerable),
-				InstanceMethod ("asyncCallback", &PluginHostWrapper::AsyncCallback, napi_enumerable),
+				InstanceMethod ("createVST3Instance", &PluginHostWrapper::CreateVST3Instance, napi_enumerable),
 				StaticMethod ("helloStatic", &PluginHostWrapper::HelloStatic, napi_enumerable)
 			});
 			Napi::FunctionReference *constructor = new Napi::FunctionReference();
@@ -70,17 +41,17 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 			return Napi::String::New (info.Env(), "Hello from Instance Method!");
 		}
 
-		void ShowAlert (const Napi::CallbackInfo& info) {
-			juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::InfoIcon, "Hello World!", "Congratulations!!!This Window is Called from Node.js");
-		}
+		void CreateVST3Instance (const Napi::CallbackInfo& info) {
+			juce::OwnedArray<juce::PluginDescription> descriptions;
 
-		void AsyncCallback (const Napi::CallbackInfo& info) {
-			Napi::Env env = info.Env();
+			juce::VST3PluginFormat format;
+			juce::StringArray foundPlugins = format.searchPathsForPlugins (juce::FileSearchPath("C:/Program Files/Common Files/VST3"), false, true);
+			format.findAllTypesForFile (descriptions, foundPlugins[0]);
 
-			Napi::Function callback = info[0].As<Napi::Function>();
+			juce::PluginDescription* description = descriptions[0];
+			std::unique_ptr<juce::AudioPluginInstance> instance = format.createInstanceFromDescription (*description, 48000, 1024);
 
-			// (new PromiseWorker(env, callback)) -> Queue();
-			// return;
+			std::cout << description->name << std::endl;
 		}
 };
 
