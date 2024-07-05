@@ -1,6 +1,18 @@
 {
 	"cSpell.words": [
+		"cflags",
+		"fexceptions",
+		"frtti",
+		"JUCE",
+		"MSVC",
+		"msvs",
 		"Naph",
-		"Napi"
-	]
+		"Napi",
+		"PLUGINHOST",
+		"RTTI",
+		"thirdparty",
+		"VCCL"
+	],
+	"C_Cpp.errorSquiggles": "disabled",
+	"cmake.ignoreCMakeListsMissing": true
 }

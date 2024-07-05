@@ -115,3 +115,4 @@ tsconfig.json     linguist-language=JSON-with-Comments
 
 # Fix syntax highlighting on GitHub to allow comments
 .vscode/*.json linguist-language=JSON-with-Comments
+JUCEStatic.lib filter=lfs diff=lfs merge=lfs -text

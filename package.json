@@ -6,11 +6,11 @@
   "author": "POTI <potistudio2022@gmail.com>",
   "license": "MIT",
   "type": "commonjs",
-  "private": false,
   "gypfile": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "node-gyp rebuild",
+    "build:debug": "node-gyp rebuild",
+    "build:release": "node-gyp rebuild --release",
     "test": "node ./test/test.js"
   },
   "devDependencies": {
@@ -18,5 +18,6 @@
   },
   "dependencies": {
     "node-addon-api": "^7.0.0"
-  }
+  },
+  "packageManager": "yarn@4.3.1"
 }
