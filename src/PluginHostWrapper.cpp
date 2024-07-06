@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <napi.h>
 #include "juce_core/juce_core.h"
@@ -46,7 +45,7 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 
 			juce::VST3PluginFormat format;
 			juce::StringArray foundPlugins = format.searchPathsForPlugins (juce::FileSearchPath("C:/Program Files/Common Files/VST3"), false, true);
-			format.findAllTypesForFile (descriptions, foundPlugins[0]);
+			format.findAllTypesForFile (descriptions, foundPlugins[15]);
 
 			juce::PluginDescription* description = descriptions[0];
 			std::unique_ptr<juce::AudioPluginInstance> instance = format.createInstanceFromDescription (*description, 48000, 1024);
@@ -54,21 +53,3 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 			std::cout << description->name << std::endl;
 		}
 };
-
-class Naph : public Napi::Addon<Naph> {
-	public:
-		Naph (Napi::Env env, Napi::Object exports) {
-			DefineAddon (exports, {
-				InstanceMethod ("hello", &Naph::Hello, napi_enumerable)
-			});
-
-			PluginHostWrapper::Init (env, exports);
-		}
-
-	private:
-		Napi::Value Hello (const Napi::CallbackInfo& info) {
-			return Napi::String::New (info.Env(), "Hello World!");
-		}
-};
-
-NODE_API_ADDON (Naph);

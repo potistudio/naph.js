@@ -3,7 +3,9 @@
 		{
 			"target_name": "naph",
 			"sources": [
-				"src/Main.cpp",
+				"src/Addon.cpp",
+				"src/PluginHost.cpp",
+				"src/PluginHostWrapper.cpp",
 				"lib/thirdparty/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp",
 				"lib/thirdparty/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp",
 				"lib/thirdparty/JUCE/modules/juce_core/juce_core.cpp",
