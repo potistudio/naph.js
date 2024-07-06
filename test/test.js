@@ -1,5 +1,5 @@
 
-const naph = require ("..");
+import naph from "naph";
 
 console.log (naph.hello()); // "Hello World!"
 console.log (naph.PluginHost.helloStatic()); // "Hello from Static Method!"

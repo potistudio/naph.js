@@ -5,9 +5,9 @@
   "repository": "https://github.com/potistudio/naph.js",
   "author": "POTI <potistudio2022@gmail.com>",
   "license": "MIT",
-  "type": "commonjs",
   "gypfile": true,
-  "main": "lib/index.js",
+  "exports": "./lib/index.js",
+  "type": "module",
   "scripts": {
     "build:debug": "node-gyp rebuild",
     "build:release": "node-gyp rebuild --release",
