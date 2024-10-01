@@ -1,5 +1,6 @@
 #include <iostream>
 #include <napi.h>
+#include <math.h>
 #include "juce_core/juce_core.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 
@@ -41,11 +42,25 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 		}
 
 		void CreateVST3Instance (const Napi::CallbackInfo& info) {
+			Napi::Env env = info.Env();
+
+			if (info.Length() != 1) {
+				Napi::TypeError::New (env, "Expected 1 argument").ThrowAsJavaScriptException();
+				return;
+			}
+
+			if (!info[0].IsNumber()) {
+				Napi::TypeError::New (env, "Expected 1st argument to be a string").ThrowAsJavaScriptException();
+				return;
+			}
+
+			int index = static_cast<int>(info[0].As<Napi::Number>());
+
 			juce::OwnedArray<juce::PluginDescription> descriptions;
 
 			juce::VST3PluginFormat format;
 			juce::StringArray foundPlugins = format.searchPathsForPlugins (juce::FileSearchPath("C:/Program Files/Common Files/VST3"), false, true);
-			format.findAllTypesForFile (descriptions, foundPlugins[0]);
+			format.findAllTypesForFile (descriptions, foundPlugins[index]);
 
 			juce::PluginDescription* description = descriptions[0];
 			std::unique_ptr<juce::AudioPluginInstance> instance = format.createInstanceFromDescription (*description, 48000, 1024);
