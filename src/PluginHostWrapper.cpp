@@ -65,6 +65,29 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 			juce::PluginDescription* description = descriptions[0];
 			std::unique_ptr<juce::AudioPluginInstance> instance = format.createInstanceFromDescription (*description, 48000, 1024);
 
-			std::cout << description->name << std::endl;
+			instance->prepareToPlay (48000, 1024);
+			juce::AudioProcessor::BusesLayout buses = instance->getBusesLayout();
+
+			std::cout << "\n-------- " << instance->getName() << " --------" << std::endl;
+			std::cout << "inputs: " << buses.inputBuses.size() << std::endl;
+			std::cout << "outputs: " << buses.outputBuses.size() << std::endl;
+			std::cout << "----------------\n" << std::endl;
+
+			juce::Array<juce::AudioProcessorParameter*> params = instance->getParameters();
+
+			std::cout << "\n--------" << "parameters: " << params.size() << "--------" << std::endl;
+			for (int i = 0; i < params.size(); ++i) {
+				std::cout << params[i]->getName(128) << "(" << params[i]->getLabel() << ")" << " : " << params[i]->getValue() << " / " << params[i]->getCurrentValueAsText() << std::endl;
+			}
+			std::cout << "----------------\n" << std::endl;
+
+			//TODO: Process Block
+			juce::AudioProcessorEditor* editor = instance->createEditor();
+			editor->addToDesktop (juce::ComponentPeer::StyleFlags::windowAppearsOnTaskbar);
+
+			std::this_thread::sleep_for(std::chrono::seconds(5));
+
+			editor->removeFromDesktop();
+			instance->releaseResources();
 		}
 };
