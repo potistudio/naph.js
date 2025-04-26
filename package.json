@@ -14,11 +14,15 @@
     "test": "node ./test/test.js"
   },
   "devDependencies": {
-    "node-gyp": "^10.0.1"
+    "node-gyp": "^10.0.1",
+    "@types/bun": "latest"
   },
   "dependencies": {
     "bindings": "^1.5.0",
     "node-addon-api": "^7.0.0"
   },
-  "packageManager": "yarn@4.3.1"
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5"
+  }
 }
