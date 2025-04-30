@@ -4,7 +4,7 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               projectLineFeed="&#10;" companyName="potistudio" includeBinaryInJuceHeader="0"
               defines="JUCE_PLUGINHOST_VST3&#10;JUCE_STANDALONE_APPLICATION&#10;JUCE_WINDOWS"
-              headerPath="C:\Users\poti\Downloads\juce-8.0.7-windows\JUCE\modules\juce_audio_processors\format_types\VST3_SDK">
+              headerPath="C:/bin/vst3">
   <MAINGROUP id="qCs6DF" name="static">
     <GROUP id="{FADA97AA-CAE9-C2CF-CE1A-ED1D4370A33B}" name="Source"/>
   </MAINGROUP>
