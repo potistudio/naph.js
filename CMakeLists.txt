@@ -36,7 +36,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE "lib/thirdparty/juce/modules"
 target_include_directories(${PROJECT_NAME} PRIVATE "lib/thirdparty/juce/modules/juce_audio_processors/format_types/VST3_SDK")
 ###########################################
 
-set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/LTCG:STATUS")
+set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/LTCG:INCREMENTAL")
 
 ################ Linking ##################
 # Link CMake.js library (x64)
