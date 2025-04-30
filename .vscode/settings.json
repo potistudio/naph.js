@@ -4,6 +4,7 @@
 		"fexceptions",
 		"frtti",
 		"JUCE",
+		"LTCG",
 		"MSVC",
 		"msvs",
 		"Naph",
