@@ -17,7 +17,7 @@ add_compile_definitions(
 
 
 ################ Compiling ################
-file(GLOB SOURCE_FILES "src/*.cpp")
+file(GLOB SOURCE_FILES "src/*.cc")
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
