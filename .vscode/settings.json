@@ -14,5 +14,4 @@
 		"VCCL"
 	],
 	"C_Cpp.errorSquiggles": "disabled",
-	"cmake.ignoreCMakeListsMissing": true
 }
