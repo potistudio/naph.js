@@ -1,5 +1,5 @@
 #include <napi.h>
-#include "PluginHostWrapper.cpp"
+#include "PluginHostWrapper.cc"
 
 class Naph : public Napi::Addon<Naph> {
 	public:

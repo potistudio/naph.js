@@ -4,6 +4,7 @@
 		"fexceptions",
 		"frtti",
 		"JUCE",
+		"LTCG",
 		"MSVC",
 		"msvs",
 		"Naph",
@@ -14,5 +15,4 @@
 		"VCCL"
 	],
 	"C_Cpp.errorSquiggles": "disabled",
-	"cmake.ignoreCMakeListsMissing": true
 }

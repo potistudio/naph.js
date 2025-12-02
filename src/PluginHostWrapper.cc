@@ -2,6 +2,7 @@
 #include <napi.h>
 #include <math.h>
 #include "juce_core/juce_core.h"
+#include <juce_events/juce_events.h>
 #include "juce_audio_processors/juce_audio_processors.h"
 
 class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
@@ -85,7 +86,14 @@ class PluginHostWrapper : public Napi::ObjectWrap<PluginHostWrapper> {
 			juce::AudioProcessorEditor* editor = instance->createEditor();
 			editor->addToDesktop (juce::ComponentPeer::StyleFlags::windowAppearsOnTaskbar);
 
-			std::this_thread::sleep_for(std::chrono::seconds(5));
+			juce::MessageManager::getInstance()->runDispatchLoop();
+
+			while (true) {
+				if (!editor->isShowing()) {
+					juce::MessageManager::getInstance()->stopDispatchLoop();
+					break;
+				}
+			}
 
 			editor->removeFromDesktop();
 			instance->releaseResources();
